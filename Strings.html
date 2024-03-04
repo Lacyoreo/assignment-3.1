@@ -1,0 +1,109 @@
+<html>
+<head>
+  <title>Palindrome Checker</title>
+  <style>
+
+    /* Styling */
+    /* Eliana Beatty */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #727272;
+      text-align: center;
+      margin-top: 150px;
+
+    }
+    
+    h1 {
+      color: #e4e4e4;
+    }
+    
+
+
+    .input-field {
+      margin-bottom: 20px;
+    }
+    
+    .result-message {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Palindrome Checker</h1>
+  
+  <div id="inputSection">
+    <label for="wordInput">Enter a word or phrase:</label>
+    <input type="text" id="wordInput" class="input-field">
+    <button onclick="checkPalindrome()">Check</button>
+  </div>
+
+  <br>
+
+  <div id="resultSection" style="display: none;">
+    <p id="resultMessage" class="result-message"></p>
+    <button onclick="reset()">Enter another word</button>
+  </div>
+  
+
+  <script>
+    // Check if a string is a palindrome
+    function isPalindrome(str) {
+      // Remove spaces and convert to lowercase
+      str = str.replace(/\s/g, '').toLowerCase();
+      
+      // Reverse the string
+      var reversedStr = str.split('').reverse().join('');
+      
+      // Check if strings are equal
+      return str === reversedStr;
+    }
+    
+    // Function to handle palindrome checking
+    function checkPalindrome() {
+      var wordInput = document.getElementById('wordInput');
+      var userInput = wordInput.value;
+      
+      // If inpur is empty
+      if (userInput.trim() === '') {
+        displayResult("Invalid input. Please enter a word or phrase.", false);
+        return;
+      }
+      
+      // Check if the input is a palindrome
+      var isPalin = isPalindrome(userInput);
+      
+      // Display the result
+      var resultMessage = isPalin ? "The input is a palindrome!" : "The input is not a palindrome.";
+      displayResult(resultMessage, true);
+    }
+    
+    // Display the result message
+    function displayResult(message, showInputSection) {
+      var inputSection = document.getElementById('inputSection');
+      var resultSection = document.getElementById('resultSection');
+      var resultMessage = document.getElementById('resultMessage');
+      
+      resultMessage.textContent = message;
+      
+      if (showInputSection) {
+        inputSection.style.display = 'none';
+        resultSection.style.display = 'block';
+      } else {
+        inputSection.style.display = 'block';
+        resultSection.style.display = 'none';
+      }
+    }
+    
+    //  Reset the form and allow the user to enter another word
+    function reset() {
+      var wordInput = document.getElementById('wordInput');
+      var inputSection = document.getElementById('inputSection');
+      var resultSection = document.getElementById('resultSection');
+      
+      wordInput.value = '';
+      inputSection.style.display = 'block';
+      resultSection.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
